@@ -61,3 +61,33 @@ button {
   outline: none;
   border: none;
 }
+
+section.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section.info {
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img.weather-img {
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+}
+
+h2#weather {
+  font-size: 1.8em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 0.8em;
+  text-align: center;
+}
+

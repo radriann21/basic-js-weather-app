@@ -1,24 +1,23 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { getUserWeather } from "./services/getUserWeather.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const weatherImg = document.getElementById('weatherImg')
+const weather = document.getElementById('weather')
+const description = document.getElementById('description')
 
-setupCounter(document.querySelector('#counter'))
+function updateUI(data) {
+  weatherImg.src = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png'
+  weather.innerText = data.weather[0].main
+  description.innerText = data.weather[0].description
+}
+
+function setUserWeather() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const { latitude, longitude } = position.coords
+      const data = await getUserWeather(latitude, longitude)
+      updateUI(data)
+    })
+  }
+}
+
+document.addEventListener('DOMContentLoaded', setUserWeather)
