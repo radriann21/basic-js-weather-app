@@ -60,6 +60,11 @@ button {
   padding: .5rem;
   outline: none;
   border: none;
+  cursor: pointer;
+  transition: background .3s ease;
+}
+button:hover {
+  background-color: #282828;
 }
 
 section.results {
